@@ -40,11 +40,15 @@ a {
 a:hover {
     color: var(--dark-purple);
 }
+input {
+    padding: 10px;
+    margin: 20px;
+    font-size: large;
+}
 /* header */
 header {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 100px;
 }
 header div {
     padding: 25px;
@@ -52,7 +56,7 @@ header div {
 
 /* main content */
 .page-content {
-    padding: 100px;
+    padding: 50px;
 }
 .questions-container {
     display: flex;
@@ -61,12 +65,12 @@ header div {
     align-items: center;
 }
 .questions-container div{
-    width: 980px;
+    width: 800px;
     padding-bottom: 15px;
 }
 .btn {
     border: none;
-    padding: 18px;
+    padding: 8px;
     font-size: 28px;
     background-color: var(--dark-purple);
     color: #fff;
@@ -79,11 +83,11 @@ header div {
     font-size: 32px;
     text-align: left;
 }
-.col-3-border {
+.col-4-border {
     border-top: grey 1px solid;
     justify-content: left;
 }
-.question-text {
+.align-left {
     text-align: left;
 }
 .cols {
