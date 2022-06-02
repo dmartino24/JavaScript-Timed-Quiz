@@ -17,29 +17,30 @@ h1 {
     font-size: 54px;
     text-align: center;
 }
+h3 {
+    font-size: 24px;
+}
 p {
     font-size: 32px;
     line-height: 1.25;
     text-align: center;
 }
-h3 {
-    font-size: 24px;
-}
+
 ul {
+    
     display: flex;
     flex-direction: column;
 }
 ol {
+    
+    display: flex;
+    flex-direction: column;
     padding: 8px;
+}
+li {
+    list-style-type: none;
+}
 
-}
-a {
-    text-decoration: none;
-    color: var(--purple);
-}
-a:hover {
-    color: var(--dark-purple);
-}
 input {
     padding: 10px;
     margin: 20px;
@@ -52,6 +53,17 @@ header {
 }
 header div {
     padding: 25px;
+}
+.view-score-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--purple);
+}
+.view-score-btn:hover {
+    color: var(--dark-purple);
+    cursor: pointer;
 }
 
 /* main content */
@@ -71,6 +83,7 @@ header div {
 .btn {
     border: none;
     padding: 8px;
+    margin: 10px;
     font-size: 28px;
     background-color: var(--dark-purple);
     color: #fff;
@@ -94,10 +107,23 @@ header div {
     display: flex;
     justify-content: center;
 }
-
+.high-score {
+    font-size: 32px;
+    width: 100%;
+    
+    padding: 10px;
+}
+.purple-bg {
+    background-color: var(--light-purple);
+    padding: 10px;
+}
+.purple-bg:nth-child(even){
+    background-color: var(--purple);
+}
 .btn:hover {
     background-color: var(--purple);
 }
+
 
 /* media 980 px */
 @media screen and (max-width: 980px){
