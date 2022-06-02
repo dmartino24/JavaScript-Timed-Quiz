@@ -14,6 +14,7 @@ var startTime = 75;
 var finishedGame = false;
 var tempQuestions;
 var timerID;
+var currentPlayerInitials;
 // available questions to answer
 var questions = [
   {
@@ -108,10 +109,18 @@ var questions = [
     ],
   },
 ];
+var submitScoreHandler = function () {
+  var initialsInputEl = document.querySelector("input");
+  if (initialsInputEl.validity.valid && initialsInputEl.value.length > 1) {
+    currentPlayerInitials = initialsInputEl.value;
+  } else {
+    alert("Need to type in two letters.");
+  }
+};
 var submitGameScore = function () {
   timerTextEl.textContent = currentTime;
   clearInterval(timerID);
-  var pointsRewarded = currentTime;
+
   var titleEl = document.createElement("h1");
   colEl1.appendChild(titleEl);
   titleEl.textContent = "Well Done!";
@@ -126,9 +135,13 @@ var submitGameScore = function () {
   colEl3.appendChild(initialsInputEl);
   colEl3.appendChild(initialSubmitButtonEl);
   initialsTextEl.textContent = "Enter initials: ";
-  initialSubmitButtonEl.textContent = "Submit";
+  initialsInputEl.pattern = "[A-Za-z]{2}";
   initialsInputEl.maxLength = 2;
+  initialSubmitButtonEl.textContent = "Submit";
   initialSubmitButtonEl.className = "btn";
+  initialSubmitButtonEl.addEventListener("click", function () {
+    submitScoreHandler();
+  });
   colEl1.style["justify-content"] = "left";
   colEl3.style["justify-content"] = "left";
   colEl3.style["align-items"] = "center";
