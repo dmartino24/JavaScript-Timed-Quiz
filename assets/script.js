@@ -15,7 +15,7 @@ var startTime = 75;
 var tempQuestions;
 var timerID;
 var highScores = [];
-// questions object 
+// questions object
 var questions = [
   {
     questionTitle: "JavaScript is the programming language of the _____.",
@@ -45,7 +45,8 @@ var questions = [
     ],
   },
   {
-    questionTitle: "Which property is used to define the HTML content to an HTML element with a specific id?",
+    questionTitle:
+      "Which property is used to define the HTML content to an HTML element with a specific id?",
     answers: [
       { text: "innerText", isAnswer: false },
       { text: "innerContent", isAnswer: false },
@@ -54,7 +55,8 @@ var questions = [
     ],
   },
   {
-    questionTitle: "Which JavaScript method is used to write on browser's console?",
+    questionTitle:
+      "Which JavaScript method is used to write on browser's console?",
     answers: [
       { text: "console.write()", isAnswer: false },
       { text: "console.output()", isAnswer: false },
@@ -63,7 +65,8 @@ var questions = [
     ],
   },
   {
-    questionTitle: "Which JavaScript method is used to write into an alert box?",
+    questionTitle:
+      "Which JavaScript method is used to write into an alert box?",
     answers: [
       { text: "window.alertHTML()", isAnswer: false },
       { text: "window.alert()", isAnswer: true },
@@ -110,9 +113,9 @@ var questions = [
   },
 ];
 // handler for the back button
-var backHandler = function(){
+var backHandler = function () {
   removeColsContent();
-  // clears out the old styles 
+  // clears out the old styles
   colEl1.removeAttribute("style");
   colEl2.removeAttribute("style");
   colEl3.removeAttribute("style");
@@ -121,7 +124,7 @@ var backHandler = function(){
   highScoreContainerEl.appendChild(highScoreButtonEl);
   highScoreButtonEl.textContent = "View high scores";
   highScoreButtonEl.className = "view-score-btn";
-  highScoreButtonEl.addEventListener('click', createHighScore);
+  highScoreButtonEl.addEventListener("click", createHighScore);
 
   var timerContainerEl = document.querySelector(".timer-container");
   var timeTextEl = document.createElement("h3");
@@ -139,22 +142,23 @@ var backHandler = function(){
 
   var descriptionEl = document.createElement("p");
   colEl2.appendChild(descriptionEl);
-  descriptionEl.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that the incorrect answers will penalize your score/time by ten seconds";
+  descriptionEl.textContent =
+    "Try to answer the following code-related questions within the time limit. Keep in mind that the incorrect answers will penalize your score/time by ten seconds";
 
   var startButtonEl = document.createElement("button");
   colEl3.appendChild(startButtonEl);
   startButtonEl.textContent = "Start Quiz";
   startButtonEl.className = "btn start-btn";
   startButtonEl.addEventListener("click", startGame);
-}
+};
 // handler for the clear high scores button
-var clearHighScoresHandler = function(){
+var clearHighScoresHandler = function () {
   highScores = [];
   localStorage.clear();
   backHandler();
-}
-// creates the correct elements for highScore functionality 
-var createHighScore = function() {
+};
+// creates the correct elements for highScore functionality
+var createHighScore = function () {
   clearInterval(timerID);
   removeColsContent();
   colEl4.classList.remove("col-4-border");
@@ -165,22 +169,24 @@ var createHighScore = function() {
   titleEl.textContent = "High scores";
 
   var ulEl = document.createElement("ul");
-  
+
   colEl2.appendChild(ulEl);
   ulEl.className = "high-score";
-  
+
   // loads the most updated scores
   loadHighScores();
   //reorders the array to highest to lowest highScore
-  highScores.sort((a, b) => (a.score < b.score) ? 1 : -1);
+  // found the code for this part javascript by Tired Termite on Grepper website
+  highScores.sort((a, b) => (a.score < b.score ? 1 : -1));
   // creating li and putting in the highScores data in it
-  for(var i = 0; i < highScores.length; i++){
+  for (var i = 0; i < highScores.length; i++) {
     var liEl = document.createElement("li");
     ulEl.append(liEl);
-    liEl.textContent = i+1 + ". " + highScores[i].initials + " - " + highScores[i].score;
+    liEl.textContent =
+      i + 1 + ". " + highScores[i].initials + " - " + highScores[i].score;
     liEl.className = "purple-bg";
   }
-  
+
   var backButtonEl = document.createElement("button");
   var clearButtonEl = document.createElement("button");
   colEl3.appendChild(backButtonEl);
@@ -191,7 +197,7 @@ var createHighScore = function() {
   clearButtonEl.textContent = "Clear high scores";
   backButtonEl.addEventListener("click", backHandler);
   clearButtonEl.addEventListener("click", clearHighScoresHandler);
-}
+};
 // handler for the submit button and validating the input
 var submitScoreHandler = function () {
   var initialsInputEl = document.querySelector("input");
@@ -199,8 +205,8 @@ var submitScoreHandler = function () {
     currentPlayerInitials = initialsInputEl.value;
     var newHighScoreObject = {
       initials: initialsInputEl.value.toUpperCase(),
-      score: currentTime
-    }
+      score: currentTime,
+    };
     highScores.push(newHighScoreObject);
     saveHighScores();
     removeColsContent();
@@ -211,14 +217,13 @@ var submitScoreHandler = function () {
 };
 
 var submitGameScore = function () {
-  removeColsContent();
+  removeColsRMContent();
   // checks if negative then will set it to 0
-  if(currentTime <= 0){
+  if (currentTime <= 0) {
     currentTime = 0;
   }
   clearInterval(timerID);
   timerTextEl.textContent = currentTime;
-  
 
   var titleEl = document.createElement("h1");
   colEl1.appendChild(titleEl);
@@ -318,7 +323,7 @@ var removeColsContent = function () {
     }
   }
 };
-// removes all cols-rm children 
+// removes all cols-rm children
 var removeColsRMContent = function () {
   for (var i = 0; i < colsRMEls.length; i++) {
     var child = colsRMEls[i].lastElementChild;
@@ -333,14 +338,14 @@ var startTimer = function () {
   timerID = setInterval(function () {
     currentTime -= 1;
     timerTextEl.textContent = currentTime;
-    if(currentTime <= 0){
+    if (currentTime <= 0) {
       submitGameScore();
     }
   }, 1000);
 };
 //starts the quiz
 var startGame = function () {
-  // inits vars 
+  // inits vars
   currentTime = startTime;
   totalAnswers = 0;
   tempQuestions = [];
@@ -351,21 +356,21 @@ var startGame = function () {
   startTimer();
 };
 // saves the highScore object to local storage
-var saveHighScores = function() {
+var saveHighScores = function () {
   localStorage.setItem("highScores", JSON.stringify(highScores));
-}
+};
 // loads the score into highScores array
-var loadHighScores = function() {
+var loadHighScores = function () {
   highScores = [];
   var savedHighScores = localStorage.getItem("highScores");
-  if(!savedHighScores){
+  if (!savedHighScores) {
     return false;
   }
   savedHighScores = JSON.parse(savedHighScores);
-  for(var i = 0; i < savedHighScores.length; i++){
+  for (var i = 0; i < savedHighScores.length; i++) {
     highScores.push(savedHighScores[i]);
   }
-}
+};
 startButtonEl.addEventListener("click", startGame);
-highScoreButtonEl.addEventListener('click', createHighScore);
+highScoreButtonEl.addEventListener("click", createHighScore);
 loadHighScores();
