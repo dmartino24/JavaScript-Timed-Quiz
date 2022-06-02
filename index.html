@@ -15,23 +15,30 @@
         </h3>
       </div>
       <div class="timer-container">
-        <h3 class="timer-text">Time: <span>75</span></h3>
+        <h3 class="time-text">Time: <span id="timer-left-text">75</span></h3>
       </div>
     </header>
     <main class="page-content" id="page-content">
-      <section class="questions-container">
-        <div class="question-text">
+      <section class="questions-container" id="questions-container">
+        <div id="col-1" class="cols cols-rm">
           <h1>Coding Quiz Challenge</h1>
         </div>
-        <div class="interduction">
+        <div id="col-2" class="cols cols-rm">
           <p>
             Try to answer the following code-related questions within the time
             limit. Keep in mind that the incorrect answers will penalize your
             score/time by ten seconds
           </p>
         </div>
-        <button class="btn start-btn" id="start-btn">Start Quiz</button>
+        <div id="col-3" class="cols">
+            <button class="btn start-btn" id="start-btn">Start Quiz</button>
+        </div>
+        <div id="col-4" class="cols cols-rm">
+               <!-- Correct or incorrect goes here -->
+        </div>
+          
       </section>
     </main>
+    <script src="assets/script.js"></script>
   </body>
 </html>

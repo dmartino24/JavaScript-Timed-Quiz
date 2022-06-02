@@ -25,6 +25,14 @@ p {
 h3 {
     font-size: 24px;
 }
+ul {
+    display: flex;
+    flex-direction: column;
+}
+ol {
+    padding: 8px;
+
+}
 a {
     text-decoration: none;
     color: var(--purple);
@@ -41,6 +49,7 @@ header {
 header div {
     padding: 25px;
 }
+
 /* main content */
 .page-content {
     padding: 100px;
@@ -62,7 +71,26 @@ header div {
     background-color: var(--dark-purple);
     color: #fff;
     border-radius: 8px;
+    cursor: pointer;
 }
+.answer-response {
+    
+    color: grey;
+    font-size: 32px;
+    text-align: left;
+}
+.col-3-border {
+    border-top: grey 1px solid;
+    justify-content: left;
+}
+.question-text {
+    text-align: left;
+}
+.cols {
+    display: flex;
+    justify-content: center;
+}
+
 .btn:hover {
     background-color: var(--purple);
 }
