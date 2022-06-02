@@ -1,3 +1,4 @@
+// element that will be used through out the project
 var startButtonEl = document.querySelector("#start-btn");
 var colsEls = document.querySelectorAll(".cols");
 var colsRMEls = document.querySelectorAll(".cols-rm");
@@ -7,110 +8,111 @@ var colEl3 = document.querySelector("#col-3");
 var colEl4 = document.querySelector("#col-4");
 var timerTextEl = document.querySelector("#timer-left-text");
 var highScoreButtonEl = document.querySelector(".view-score-btn");
+//global vars
 var currentTime;
 var totalAnswers;
 var startTime = 75;
-var finishedGame = false;
 var tempQuestions;
 var timerID;
-var currentPlayerInitials;
 var highScores = [];
-// available questions to answer
+// questions object 
 var questions = [
   {
-    questionTitle: "Question 1",
+    questionTitle: "JavaScript is the programming language of the _____.",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "Web", isAnswer: true },
+      { text: "Desktop", isAnswer: false },
+      { text: "Server", isAnswer: false },
+      { text: "Mobile", isAnswer: false },
     ],
   },
   {
-    questionTitle: "question 2",
+    questionTitle: "Which type of JavaScript language is _____?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "Object-oriented", isAnswer: false },
+      { text: "Object-based", isAnswer: true },
+      { text: "functional programming", isAnswer: false },
+      { text: "All of the above", isAnswer: false },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "In which HTML element, we put the JavaScript code?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "<javascript>...</javascript>", isAnswer: false },
+      { text: "<js>...</js>", isAnswer: false },
+      { text: "<script>...</script>", isAnswer: true },
+      { text: "<css>...</css>", isAnswer: false },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "Which property is used to define the HTML content to an HTML element with a specific id?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "innerText", isAnswer: false },
+      { text: "innerContent", isAnswer: false },
+      { text: "elementText", isAnswer: false },
+      { text: "innerHTML", isAnswer: true },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "Which JavaScript method is used to write on browser's console?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "console.write()", isAnswer: false },
+      { text: "console.output()", isAnswer: false },
+      { text: "console.log()", isAnswer: true },
+      { text: "console.writhHTML()", isAnswer: false },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "Which JavaScript method is used to write into an alert box?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "window.alertHTML()", isAnswer: false },
+      { text: "window.alert()", isAnswer: true },
+      { text: "window.alertBox()", isAnswer: false },
+      { text: "window.alertContent()", isAnswer: false },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "In JavaScript, single line comment begins with ___.",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "#", isAnswer: false },
+      { text: "/*", isAnswer: false },
+      { text: "$", isAnswer: false },
+      { text: "//", isAnswer: true },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "Which JavaScript keyword is used to declare a variable?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "var", isAnswer: true },
+      { text: "VAR", isAnswer: false },
+      { text: "int", isAnswer: false },
+      { text: "LET", isAnswer: false },
     ],
   },
   {
-    questionTitle: "question 3",
+    questionTitle: "What is the default value of an uninitialized variable?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "0", isAnswer: false },
+      { text: "undefined", isAnswer: true },
+      { text: "null", isAnswer: false },
+      { text: "NaN", isAnswer: false },
     ],
   },
   {
     questionTitle:
-      "question 4 fghg fgh fghfg fghfgh fghfh fgh fghf fgh fghf fghf fghfg fghf fghf fghf fgh fgh",
+      "Which property is used to get the length of a string in JavaScript?",
     answers: [
-      { text: "blue", isAnswer: true },
-      { text: "red", isAnswer: false },
-      { text: "pink", isAnswer: false },
-      { text: "green", isAnswer: false },
+      { text: "count", isAnswer: false },
+      { text: "len", isAnswer: false },
+      { text: "length", isAnswer: true },
+      { text: "Count", isAnswer: false },
     ],
   },
 ];
+// handler for the back button
 var backHandler = function(){
   removeColsContent();
+  // clears out the old styles 
   colEl1.removeAttribute("style");
   colEl2.removeAttribute("style");
   colEl3.removeAttribute("style");
@@ -145,12 +147,15 @@ var backHandler = function(){
   startButtonEl.className = "btn start-btn";
   startButtonEl.addEventListener("click", startGame);
 }
+// handler for the clear high scores button
 var clearHighScoresHandler = function(){
   highScores = [];
   localStorage.clear();
   backHandler();
 }
+// creates the correct elements for highScore functionality 
 var createHighScore = function() {
+  clearInterval(timerID);
   removeColsContent();
   colEl4.classList.remove("col-4-border");
   document.querySelector(".view-score-btn").remove();
@@ -164,9 +169,11 @@ var createHighScore = function() {
   colEl2.appendChild(ulEl);
   ulEl.className = "high-score";
   
+  // loads the most updated scores
   loadHighScores();
   //reorders the array to highest to lowest highScore
   highScores.sort((a, b) => (a.score < b.score) ? 1 : -1);
+  // creating li and putting in the highScores data in it
   for(var i = 0; i < highScores.length; i++){
     var liEl = document.createElement("li");
     ulEl.append(liEl);
@@ -185,6 +192,7 @@ var createHighScore = function() {
   backButtonEl.addEventListener("click", backHandler);
   clearButtonEl.addEventListener("click", clearHighScoresHandler);
 }
+// handler for the submit button and validating the input
 var submitScoreHandler = function () {
   var initialsInputEl = document.querySelector("input");
   if (initialsInputEl.validity.valid && initialsInputEl.value.length > 1) {
@@ -201,13 +209,16 @@ var submitScoreHandler = function () {
     alert("Need to type in two letters.");
   }
 };
+
 var submitGameScore = function () {
   removeColsContent();
+  // checks if negative then will set it to 0
   if(currentTime <= 0){
     currentTime = 0;
   }
-  timerTextEl.textContent = currentTime;
   clearInterval(timerID);
+  timerTextEl.textContent = currentTime;
+  
 
   var titleEl = document.createElement("h1");
   colEl1.appendChild(titleEl);
@@ -223,6 +234,7 @@ var submitGameScore = function () {
   colEl3.appendChild(initialsInputEl);
   colEl3.appendChild(initialSubmitButtonEl);
   initialsTextEl.textContent = "Enter initials: ";
+  // adds a pattern that is has to abide by to validate
   initialsInputEl.pattern = "[A-Za-z]{2}";
   initialsInputEl.maxLength = 2;
   initialSubmitButtonEl.textContent = "Submit";
@@ -230,10 +242,12 @@ var submitGameScore = function () {
   initialSubmitButtonEl.addEventListener("click", function () {
     submitScoreHandler();
   });
+  // styles to align the element correctly on screen
   colEl1.style["justify-content"] = "left";
   colEl3.style["justify-content"] = "left";
   colEl3.style["align-items"] = "center";
 };
+// checks if game is over or need another question
 var checkGameProgress = function () {
   if (totalAnswers >= 5 || currentTime <= 0) {
     submitGameScore();
@@ -241,6 +255,7 @@ var checkGameProgress = function () {
     createQuizQuestion(getRandomQuestion());
   }
 };
+// handler for the an answer button finds out if user answered correctly
 var answeredQuestionHandler = function (isAnswer) {
   removeColsContent();
   colEl4.classList.remove();
@@ -257,6 +272,7 @@ var answeredQuestionHandler = function (isAnswer) {
   totalAnswers += 1;
   checkGameProgress();
 };
+// creates the question and button choices
 var createQuizQuestion = function (question) {
   var questionTitleEl = document.createElement("h1");
   colEl1.appendChild(questionTitleEl);
@@ -268,28 +284,31 @@ var createQuizQuestion = function (question) {
   var questionAnswersULEl = document.createElement("ul");
   colEl2.appendChild(questionAnswersULEl);
 
+  // loop to get all answer buttons in the document
+  // and setting up the correct attributes
   for (var i = 0; i < question.answers.length; i++) {
-    var questionAnswersLIEl = document.createElement("ol");
+    var questionAnswersLIEl = document.createElement("li");
     questionAnswersULEl.appendChild(questionAnswersLIEl);
 
     var questionAnswersButtonEl = document.createElement("button");
     questionAnswersLIEl.appendChild(questionAnswersButtonEl);
     questionAnswersButtonEl.className = "btn answer-buttons";
     questionAnswersButtonEl.textContent =
-      i + 1 + "." + " " + question.answers[i].text;
+      i + 1 + ". " + question.answers[i].text;
     questionAnswersButtonEl.value = question.answers[i].isAnswer;
     questionAnswersButtonEl.addEventListener("click", function () {
       answeredQuestionHandler(this.value);
     });
   }
-  //col-2.appendChild
 };
+// gets random question from the tempQuestions array
 var getRandomQuestion = function () {
   var randomNum = Math.floor(Math.random() * tempQuestions.length);
   var nextQuestion = tempQuestions[randomNum];
   tempQuestions.splice(randomNum, 1);
   return nextQuestion;
 };
+// removes all cols children
 var removeColsContent = function () {
   for (var i = 0; i < colsEls.length; i++) {
     var child = colsEls[i].lastElementChild;
@@ -299,6 +318,7 @@ var removeColsContent = function () {
     }
   }
 };
+// removes all cols-rm children 
 var removeColsRMContent = function () {
   for (var i = 0; i < colsRMEls.length; i++) {
     var child = colsRMEls[i].lastElementChild;
@@ -308,6 +328,7 @@ var removeColsRMContent = function () {
     }
   }
 };
+// timer that will count down by 1 until timer is 0 or less then calls function to submit the score
 var startTimer = function () {
   timerID = setInterval(function () {
     currentTime -= 1;
@@ -319,9 +340,9 @@ var startTimer = function () {
 };
 //starts the quiz
 var startGame = function () {
+  // inits vars 
   currentTime = startTime;
   totalAnswers = 0;
-  finishedGame = false;
   tempQuestions = [];
   tempQuestions = tempQuestions.concat(questions);
 
@@ -329,9 +350,11 @@ var startGame = function () {
   createQuizQuestion(getRandomQuestion());
   startTimer();
 };
+// saves the highScore object to local storage
 var saveHighScores = function() {
   localStorage.setItem("highScores", JSON.stringify(highScores));
 }
+// loads the score into highScores array
 var loadHighScores = function() {
   highScores = [];
   var savedHighScores = localStorage.getItem("highScores");
@@ -343,7 +366,6 @@ var loadHighScores = function() {
     highScores.push(savedHighScores[i]);
   }
 }
-// on mouse click triggers startGame function
 startButtonEl.addEventListener("click", startGame);
 highScoreButtonEl.addEventListener('click', createHighScore);
 loadHighScores();

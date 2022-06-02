@@ -26,17 +26,11 @@ p {
     text-align: center;
 }
 
-ul {
-    
+ul { 
     display: flex;
     flex-direction: column;
 }
-ol {
-    
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-}
+
 li {
     list-style-type: none;
 }
@@ -90,8 +84,7 @@ header div {
     border-radius: 8px;
     cursor: pointer;
 }
-.answer-response {
-    
+.answer-response { 
     color: grey;
     font-size: 32px;
     text-align: left;
@@ -130,11 +123,22 @@ header div {
     header {
         padding-bottom: 25px;
     }
+    h1 {
+        font-size: 32px;
+    }
+    p {
+        font-size: 21px;
+    }
+    #col-2 { 
+        flex-wrap: wrap;
+    }
     .page-content {
         padding: 25px;
         margin: auto;
     }
     .questions-container div{
         width: 100%;
+        align-items: center;
     }
+    
 }
